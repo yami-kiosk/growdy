@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script type="module" src="js/music-preload.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>GROWDY</title>
   <link rel="icon" href="assets/logo.png" type="image/png" />
@@ -16,24 +17,24 @@
 
   <div class="page">
     <header class="header">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <img src="assets/logo.png" alt="GROWDY" class="logo-icon" />
         GROWDY
       </a>
       <nav class="nav">
-        <a href="how-to-play.html">Gameplay</a>
-        <a href="tokenomics.html">Token</a>
-        <a href="roadmap.html">Roadmap</a>
-        <a href="faq.html" class="active">FAQ</a>
-        <a href="about.html" class="nav-wiki">Guide</a>
-        <a href="game.html" class="nav-play-mobile">Play Now</a>
+        <a href="/gameplay">Gameplay</a>
+        <a href="/token">Token</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/faq" class="active">FAQ</a>
+        <a href="/about" class="nav-wiki">Guide</a>
+        <a href="/game" class="nav-play-mobile">Play Now</a>
       </nav>
       <div class="header-actions">
         <button class="wallet-badge" id="burnerWallet" type="button">
           <span class="wallet-dot"></span>
           <span class="wallet-address">...</span>
         </button>
-        <a href="game.html" class="btn-play-nav"><span>Play Now</span></a>
+        <a href="/game" class="btn-play-nav"><span>Play Now</span></a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -109,7 +110,7 @@
     </footer>
   </div>
 
-  <a href="faq.html" class="help-btn" aria-label="Help">?</a>
+  <a href="/faq" class="help-btn" aria-label="Help">?</a>
 
   <div class="music-player" id="musicPlayer">
     <button type="button" class="music-player-toggle" id="musicToggle" aria-label="Music" aria-expanded="false" aria-controls="musicPanel">

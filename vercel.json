@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    { "source": "/game", "destination": "/game.html" },
+    { "source": "/token", "destination": "/tokenomics.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/gameplay", "destination": "/how-to-play.html" },
+    { "source": "/roadmap", "destination": "/roadmap.html" }
+  ],
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/game.html", "destination": "/game", "permanent": true },
+    { "source": "/tokenomics.html", "destination": "/token", "permanent": true },
+    { "source": "/faq.html", "destination": "/faq", "permanent": true },
+    { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/how-to-play.html", "destination": "/gameplay", "permanent": true },
+    { "source": "/roadmap.html", "destination": "/roadmap", "permanent": true }
+  ]
+}

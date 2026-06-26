@@ -17,21 +17,27 @@ function getClient() {
   return client;
 }
 
+/** @type {HTMLElement|null} */
+let badgeElement = null;
+/** @type {(() => Promise<void>)|null} */
+let refreshBadgeCount = null;
+
 /**
  * @param {HTMLElement|null} badgeEl
  * @param {number} count
  */
 function renderBadge(badgeEl, count) {
-  if (!badgeEl) return;
+  const el = badgeEl ?? badgeElement;
+  if (!el) return;
 
   if (count < MIN_VISIBLE) {
-    badgeEl.hidden = true;
+    el.hidden = true;
     return;
   }
 
-  const countEl = badgeEl.querySelector('.online-now-count');
+  const countEl = el.querySelector('.online-now-count');
   if (countEl) countEl.textContent = String(count);
-  badgeEl.hidden = false;
+  el.hidden = false;
 }
 
 /**
@@ -74,6 +80,8 @@ export function initOnlinePresence({ walletAddress, page = 'site', badgeEl = nul
   const supabase = getClient();
   if (!supabase || !walletAddress) return;
 
+  badgeElement = badgeEl ?? badgeElement;
+
   let heartbeatTimer = null;
   let pollTimer = null;
 
@@ -83,8 +91,10 @@ export function initOnlinePresence({ walletAddress, page = 'site', badgeEl = nul
 
   const refreshCount = async () => {
     const count = await fetchOnlineCount();
-    renderBadge(badgeEl, count);
+    renderBadge(null, count);
   };
+
+  refreshBadgeCount = refreshCount;
 
   const startHeartbeat = () => {
     if (heartbeatTimer) return;
@@ -123,4 +133,10 @@ export function initOnlinePresence({ walletAddress, page = 'site', badgeEl = nul
 
 export function isPresenceEnabled() {
   return Boolean(getClient());
+}
+
+/** @param {HTMLElement|null} badgeEl */
+export function setOnlineBadgeElement(badgeEl) {
+  badgeElement = badgeEl;
+  refreshBadgeCount?.();
 }

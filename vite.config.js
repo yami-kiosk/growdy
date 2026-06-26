@@ -4,6 +4,15 @@ import { defineConfig } from 'vite';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 
+const CLEAN_ROUTES = {
+  '/game': '/game.html',
+  '/token': '/tokenomics.html',
+  '/faq': '/faq.html',
+  '/about': '/about.html',
+  '/gameplay': '/how-to-play.html',
+  '/roadmap': '/roadmap.html',
+};
+
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -18,4 +27,24 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    {
+      name: 'growdy-clean-urls',
+      configureServer(server) {
+        server.middlewares.use((req, _res, next) => {
+          if (!req.url || req.method !== 'GET') return next();
+
+          const [pathname, search = ''] = req.url.split('?');
+          const cleanPath = pathname.replace(/\/$/, '') || '/';
+          const target = CLEAN_ROUTES[cleanPath];
+
+          if (target) {
+            req.url = search ? `${target}?${search}` : target;
+          }
+
+          next();
+        });
+      },
+    },
+  ],
 });

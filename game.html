@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script type="module" src="js/music-preload.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>GROWDY</title>
   <link rel="icon" href="assets/logo.png" type="image/png" />
@@ -17,24 +18,24 @@
 
   <div class="page game-page">
     <header class="header">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <img src="assets/logo.png" alt="GROWDY" class="logo-icon" />
         GROWDY
       </a>
       <nav class="nav">
-        <a href="how-to-play.html">Gameplay</a>
-        <a href="tokenomics.html">Token</a>
-        <a href="roadmap.html">Roadmap</a>
-        <a href="faq.html">FAQ</a>
-        <a href="about.html" class="nav-wiki">Guide</a>
-        <a href="index.html" class="nav-play-mobile">Home</a>
+        <a href="/gameplay">Gameplay</a>
+        <a href="/token">Token</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/faq">FAQ</a>
+        <a href="/about" class="nav-wiki">Guide</a>
+        <a href="/" class="nav-play-mobile">Home</a>
       </nav>
       <div class="header-actions">
         <button class="wallet-badge" id="burnerWallet" type="button">
           <span class="wallet-dot"></span>
           <span class="wallet-address">...</span>
         </button>
-        <a href="index.html" class="btn-play-nav"><span>Home</span></a>
+        <a href="/" class="btn-play-nav"><span>Home</span></a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -206,7 +207,7 @@
     </main>
   </div>
 
-  <a href="about.html" class="help-btn" aria-label="Guide">?</a>
+  <a href="/about" class="help-btn" aria-label="Guide">?</a>
 
   <div class="music-player" id="musicPlayer">
     <button type="button" class="music-player-toggle" id="musicToggle" aria-label="Music" aria-expanded="false" aria-controls="musicPanel">

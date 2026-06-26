@@ -144,6 +144,20 @@ export function initMusicPlayer(els) {
     if (els.trackLabel) els.trackLabel.textContent = TRACKS[trackIndex].label;
   }
 
+  function whenAudioReady(callback) {
+    if (audio.readyState >= 1) {
+      callback();
+      return;
+    }
+    const run = () => {
+      audio.removeEventListener('loadeddata', run);
+      audio.removeEventListener('canplay', run);
+      callback();
+    };
+    audio.addEventListener('loadeddata', run, { once: true });
+    audio.addEventListener('canplay', run, { once: true });
+  }
+
   function applySeek(time, onPastEnd) {
     if (!Number.isFinite(time) || time <= 0) return;
     const apply = () => {
@@ -155,10 +169,7 @@ export function initMusicPlayer(els) {
       audio.currentTime = Math.min(Math.max(0, time), Math.max(0, audio.duration - 0.05));
     };
     if (audio.readyState >= 1) apply();
-    else {
-      audio.addEventListener('loadedmetadata', apply, { once: true });
-      audio.addEventListener('canplay', apply, { once: true });
-    }
+    else whenAudioReady(apply);
   }
 
   function loadTrack(index, autoplay = false, seekTo = null, depth = 0) {
@@ -189,8 +200,8 @@ export function initMusicPlayer(els) {
           syncPlayingUi();
         });
       };
-      if (audio.readyState >= 2) start();
-      else audio.addEventListener('canplay', start, { once: true });
+      if (audio.readyState >= 1) start();
+      else whenAudioReady(start);
     }
 
     persist();
@@ -215,8 +226,8 @@ export function initMusicPlayer(els) {
       });
     };
 
-    if (audio.readyState >= 2) start();
-    else audio.addEventListener('canplay', start, { once: true });
+    if (audio.readyState >= 1) start();
+    else whenAudioReady(start);
   }
 
   function pause() {
