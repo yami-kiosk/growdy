@@ -25,3 +25,27 @@ create policy "game_saves_insert"
 create policy "game_saves_update"
   on public.game_saves for update
   using (true);
+
+-- Live presence for "ONLINE NOW" (heartbeat every ~45s from client).
+create table if not exists public.player_presence (
+  wallet_address text primary key,
+  page text not null default 'site',
+  last_seen timestamptz not null default now()
+);
+
+create index if not exists player_presence_last_seen_idx
+  on public.player_presence (last_seen desc);
+
+alter table public.player_presence enable row level security;
+
+create policy "player_presence_select"
+  on public.player_presence for select
+  using (true);
+
+create policy "player_presence_insert"
+  on public.player_presence for insert
+  with check (true);
+
+create policy "player_presence_update"
+  on public.player_presence for update
+  using (true);

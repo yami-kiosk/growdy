@@ -412,6 +412,41 @@ html {
   margin-bottom: 28px;
 }
 
+.online-now {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: -12px 0 20px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(107, 203, 119, 0.12);
+  border: 2px solid rgba(107, 203, 119, 0.35);
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: var(--shadow);
+}
+
+.online-now[hidden] {
+  display: none !important;
+}
+
+.online-now-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(107, 203, 119, 0.85);
+  animation: onlinePulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes onlinePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.88); }
+}
+
 .cta-row {
   display: flex;
   align-items: center;
@@ -2067,7 +2102,13 @@ body.wallet-modal-active {
 
   .subheadline {
     font-size: 0.85rem;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
+  }
+
+  .online-now {
+    margin: -4px 0 16px;
+    font-size: 0.72rem;
+    padding: 7px 14px;
   }
 
   .cta-row {

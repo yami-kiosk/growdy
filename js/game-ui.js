@@ -29,6 +29,7 @@ import {
 import { formatNum, formatPct, formatRunway } from './game/format.js';
 import { playMoan, playFart, playHooray, unlockAudio } from './game/sfx.js';
 import { initMusicPlayerFromDom } from './game/music.js';
+import { initOnlinePresence } from './presence.js';
 
 /** @type {import('./game/engine.js').GameState} */
 let state;
@@ -657,6 +658,7 @@ async function boot() {
   initMusicPlayerFromDom();
   state = await loadGameState(walletAddress);
   initBurnerWalletUi({ getInGameGrowdy: () => state.growdy });
+  initOnlinePresence({ walletAddress, page: 'game' });
 
   initNav();
   initTabs();

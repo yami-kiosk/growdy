@@ -1,17 +1,24 @@
 import { getBurnerWallet, getBurnerAddress } from './wallet.js';
 import { initBurnerWalletUi } from './wallet-ui.js';
 import { initMusicPlayerFromDom } from './game/music.js';
+import { initOnlinePresence } from './presence.js';
 
 initMusicPlayerFromDom();
 initBurnerWalletUi();
+
+const wallet = getBurnerWallet();
+const address = getBurnerAddress();
+
+initOnlinePresence({
+  walletAddress: address,
+  page: document.getElementById('onlineNow') ? 'landing' : 'site',
+  badgeEl: document.getElementById('onlineNow'),
+});
 
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const nav = document.querySelector('.nav');
 const copyCaBtn = document.getElementById('copyCa');
 const contractAddressEl = document.getElementById('contractAddress');
-
-const wallet = getBurnerWallet();
-const address = getBurnerAddress();
 
 if (copyCaBtn && contractAddressEl) {
   const copyLabel = copyCaBtn.querySelector('.token-ca-copy-label');
