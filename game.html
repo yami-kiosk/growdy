@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play — GROWDY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body class="game-body">
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page game-page">
+    <header class="header">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="" class="logo-icon" width="32" height="32" />
+        GROWDY
+      </a>
+      <nav class="nav">
+        <a href="how-to-play.html">Gameplay</a>
+        <a href="tokenomics.html">Token</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="faq.html">FAQ</a>
+        <a href="about.html" class="nav-wiki">Guide</a>
+      </nav>
+      <div class="header-actions">
+        <button class="wallet-badge" id="burnerWallet" type="button">
+          <span class="wallet-dot"></span>
+          <span class="wallet-address">...</span>
+        </button>
+        <a href="index.html" class="btn-play-nav"><span>Home</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="game-main">
+      <aside class="game-hud game-hud--left">
+        <div class="game-card">
+          <p class="game-card-label">Phase</p>
+          <h2 class="game-phase-name" id="phaseName">Phase 1 — Uncut</h2>
+          <p class="game-phase-tagline" id="phaseTagline">Fresh spawn</p>
+          <div class="game-progress">
+            <div class="game-progress-bar" id="phaseProgressBar"></div>
+          </div>
+          <p class="game-progress-text" id="phaseProgressText">0 / 2,700 dickoin earned</p>
+        </div>
+
+        <div class="game-card">
+          <p class="game-card-label">IMPOTENT</p>
+          <div class="game-hp-bar">
+            <div class="game-hp-fill" id="hpFill"></div>
+          </div>
+          <p class="game-stat-row"><span id="hpText">100 / 100</span></p>
+          <p class="game-stat-row game-stat-muted" id="burnRow">Burn: 0/s · Safe zone</p>
+          <p class="game-stat-row game-stat-muted" id="runwayRow">Runway: ∞</p>
+          <button type="button" class="btn-game-panic" id="liquidateBtn">Liquidate Assets</button>
+        </div>
+
+        <div class="game-card game-stats-grid">
+          <div>
+            <p class="game-card-label">Length</p>
+            <p class="game-stat-value" id="lengthStat">1.00×</p>
+          </div>
+          <div>
+            <p class="game-card-label">Click Power</p>
+            <p class="game-stat-value" id="clickStat">1</p>
+          </div>
+          <div>
+            <p class="game-card-label">Passive</p>
+            <p class="game-stat-value" id="passiveStat">0/s</p>
+          </div>
+          <div>
+            <p class="game-card-label">Clicks</p>
+            <p class="game-stat-value" id="clicksStat">0</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="game-arena">
+        <div class="game-currency-bar">
+          <div class="game-currency">
+            <span class="game-currency-label">dickoin</span>
+            <span class="game-currency-value" id="dickoinStat">0</span>
+          </div>
+          <div class="game-currency">
+            <span class="game-currency-label">$GROWDY <span class="game-currency-hint">in-game</span></span>
+            <span class="game-currency-value game-currency-value--yellow" id="growdyStat">0</span>
+          </div>
+        </div>
+
+        <button type="button" class="game-click-zone" id="clickZone" aria-label="Click to grow">
+          <img src="assets/phase1.png" alt="" class="game-character" id="gameCharacter" width="200" height="200" />
+          <span class="game-click-hint">TAP TO GROW</span>
+          <span class="game-float-layer" id="floatLayer" aria-hidden="true"></span>
+        </button>
+
+        <p class="game-toast" id="gameToast" role="status" aria-live="polite"></p>
+      </section>
+
+      <aside class="game-hud game-hud--right">
+        <div class="game-tabs" role="tablist">
+          <button type="button" class="game-tab active" data-tab="workers" role="tab">Workers</button>
+          <button type="button" class="game-tab" data-tab="skills" role="tab">Skills</button>
+          <button type="button" class="game-tab" data-tab="gacha" role="tab">Gacha</button>
+          <button type="button" class="game-tab" data-tab="p2e" role="tab">P2E</button>
+          <button type="button" class="game-tab" data-tab="settings" role="tab">Settings</button>
+        </div>
+
+        <div class="game-panel active" id="panel-workers" role="tabpanel">
+          <p class="game-panel-desc">Hire crew — tied to growth phases & $GROWDY utility.</p>
+          <div class="game-shop-list" id="workerList"></div>
+        </div>
+
+        <div class="game-panel" id="panel-skills" role="tabpanel" hidden>
+          <p class="game-panel-desc">$GROWDY utilities — Growth Access & Guild Raids.</p>
+          <div class="game-shop-list" id="skillList"></div>
+        </div>
+
+        <div class="game-panel" id="panel-gacha" role="tabpanel" hidden>
+          <p class="game-panel-desc">Spend $GROWDY for random boosts — unlocks Phase 2.</p>
+          <div class="game-gacha-lock" id="gachaLock" hidden>
+            <p class="game-lock-msg">
+              <img src="assets/lock.png" alt="" class="game-lock-icon" width="20" height="20" />
+              Reach <strong>Phase 2</strong> to unlock Gacha.
+            </p>
+          </div>
+          <div class="game-gacha" id="gachaPanel">
+            <div class="game-gacha-banner">
+              <p class="game-gacha-title">Grow Gacha</p>
+              <p class="game-gacha-sub">Roll for dickoin, IMPOTENT relief, and timed buffs.</p>
+            </div>
+            <p class="game-gacha-buff" id="gachaBuffStatus" hidden></p>
+            <div class="game-gacha-actions">
+              <button type="button" class="btn-game-action" id="gachaSingleBtn">Pull ×1 · 50 $GROWDY</button>
+            </div>
+            <ul class="game-gacha-rates" id="gachaRates"></ul>
+            <div class="game-gacha-results" id="gachaResults" hidden>
+              <p class="game-gacha-results-label">Last pull</p>
+              <ul class="game-gacha-result-list" id="gachaResultList"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-panel" id="panel-p2e" role="tabpanel" hidden>
+          <p class="game-panel-desc">Swap dickoin → $GROWDY. Unlocks at Phase 2.</p>
+          <div class="game-p2e-lock" id="p2eLock" hidden>
+            <p class="game-lock-msg">
+              <img src="assets/lock.png" alt="" class="game-lock-icon" width="20" height="20" />
+              Reach <strong>Phase 2</strong> to unlock swap.
+            </p>
+          </div>
+          <div class="game-p2e" id="p2ePanel">
+            <p class="game-tax-tier" id="taxTierLabel">0 $GROWDY → 80% tax</p>
+            <p class="game-tax-rate">Current tax: <strong id="taxRateLabel">80%</strong></p>
+            <label class="game-swap-label" for="swapAmount">Amount (dickoin)</label>
+            <input type="number" class="game-swap-input" id="swapAmount" min="10" step="10" value="100" />
+            <p class="game-swap-preview">You receive: <strong id="swapPreview">0</strong> $GROWDY</p>
+            <button type="button" class="btn-game-action" id="swapBtn">Convert to $GROWDY</button>
+            <button type="button" class="btn-game-action btn-game-action--secondary" id="swapMaxBtn">Swap Max</button>
+            <p class="game-currency-note">In-game $GROWDY is separate from tokens in your Solana wallet. Swap converts dickoin → in-game balance for gacha & tax tiers.</p>
+          </div>
+        </div>
+
+        <div class="game-panel" id="panel-settings" role="tabpanel" hidden>
+          <p class="game-panel-desc">Wallet, cloud save & account options.</p>
+          <div class="game-settings">
+            <section class="game-settings-block">
+              <h3 class="game-settings-title">Two types of $GROWDY</h3>
+              <ul class="game-settings-list">
+                <li><strong>In-game</strong> — earned by swapping dickoin inside the game. Used for gacha, tax tiers & skills. Shown on the arena HUD.</li>
+                <li><strong>On-chain</strong> — real SPL token in your burner wallet. Buy on Pump.fun, trade on DEX. Check balance via the wallet button in the header.</li>
+              </ul>
+            </section>
+
+            <section class="game-settings-block">
+              <h3 class="game-settings-title">Cloud save</h3>
+              <p class="game-settings-text" id="settingsCloudStatus">Checking…</p>
+              <p class="game-settings-hint">Progress is tied to your burner wallet address. Play on any device with the same wallet key.</p>
+            </section>
+
+            <section class="game-settings-block">
+              <h3 class="game-settings-title">Wallet</h3>
+              <p class="game-settings-text">Address: <code class="game-settings-code" id="settingsWalletAddr">…</code></p>
+              <button type="button" class="btn-game-action" id="settingsOpenWalletBtn">Open Wallet</button>
+              <button type="button" class="btn-game-action btn-game-action--secondary" id="settingsExportKeyBtn">Export Secret Key</button>
+            </section>
+
+            <section class="game-settings-block game-settings-block--danger">
+              <h3 class="game-settings-title">Reset progress</h3>
+              <p class="game-settings-text">Deletes in-game save locally and in cloud. Wallet & on-chain tokens are not affected.</p>
+              <label class="game-settings-label" for="settingsResetConfirm">Type <strong>RESET</strong> to confirm</label>
+              <input type="text" class="game-swap-input" id="settingsResetConfirm" autocomplete="off" spellcheck="false" />
+              <button type="button" class="btn-game-action btn-game-action--danger" id="settingsResetBtn" disabled>Wipe Save</button>
+            </section>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <a href="about.html" class="help-btn" aria-label="Guide">?</a>
+
+  <div class="music-player" id="musicPlayer">
+    <button type="button" class="music-player-toggle" id="musicToggle" aria-label="Music" aria-expanded="false" aria-controls="musicPanel">
+      <span class="music-player-icon" aria-hidden="true">🎵</span>
+    </button>
+    <div class="music-player-panel" id="musicPanel" hidden>
+      <p class="music-player-track" id="musicTrack">Goofy 1</p>
+      <div class="music-player-controls">
+        <button type="button" class="music-player-btn" id="musicPlay" aria-label="Play">▶</button>
+        <button type="button" class="music-player-btn" id="musicPause" aria-label="Pause">⏸</button>
+        <button type="button" class="music-player-btn" id="musicNext" aria-label="Next track">⏭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-modal" id="phaseModal" hidden>
+    <div class="phase-modal-backdrop" id="phaseModalBackdrop"></div>
+    <div class="phase-modal-card" id="phaseModalCard" role="dialog" aria-modal="true" aria-labelledby="phaseModalTitle">
+      <p class="phase-modal-badge" id="phaseModalBadge">Phase Up!</p>
+      <img src="" alt="" class="phase-modal-img" id="phaseModalImg" width="240" height="240" />
+      <h2 class="phase-modal-title" id="phaseModalTitle">Phase 2 — The Trim</h2>
+      <p class="phase-modal-desc" id="phaseModalDesc"></p>
+      <ul class="phase-modal-perks" id="phaseModalPerks"></ul>
+      <button type="button" class="btn-game-action" id="phaseModalBtn">Let's Grow!</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/game-ui.js"></script>
+</body>
+</html>

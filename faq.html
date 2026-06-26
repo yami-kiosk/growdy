@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Growdy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="header">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="" class="logo-icon" width="32" height="32" />
+        GROWDY
+      </a>
+      <nav class="nav">
+        <a href="how-to-play.html">Gameplay</a>
+        <a href="tokenomics.html">Token</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="faq.html" class="active">FAQ</a>
+        <a href="about.html" class="nav-wiki">Guide</a>
+      </nav>
+      <div class="header-actions">
+        <button class="wallet-badge" id="burnerWallet" type="button">
+          <span class="wallet-dot"></span>
+          <span class="wallet-address">...</span>
+        </button>
+        <a href="game.html" class="btn-play-nav"><span>Play Now</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-main page-main--faq">
+      <div class="faq-page">
+        <p class="faq-file-label">Got Questions?</p>
+        <h1 class="faq-title">FAQ</h1>
+
+        <div class="faq-accordion">
+          <details class="faq-entry">
+            <summary>What is Growdy?</summary>
+            <p>A slither-style play-to-earn game on Solana. Grow your worm, earn dickoin, convert to $GROWDY, and compete for season rewards.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>Is it free to play?</summary>
+            <p>Yes! No upfront cost. Just open the site and start playing — your burner wallet is created automatically.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>Do I need a wallet to play?</summary>
+            <p>No external wallet required. A burner wallet is auto-generated and saved in your browser. Back up your secret key from the <strong>Settings</strong> tab in-game (or the wallet button in the header) to import into Phantom or Solflare.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>What is dickoin?</summary>
+            <p>Dickoin is the in-game currency you earn passively from Phase 2 onward. At Phase 2 you unlock the swap to convert dickoin → $GROWDY in the P2E panel — but watch out for taxes!</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>How do I earn $GROWDY?</summary>
+            <p>Earn dickoin passively, convert it in the P2E panel, win tenders, and reach Phase 6 to qualify for the Season Exit Pool.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>What is Grow Gacha?</summary>
+            <p>Spend $GROWDY in the Gacha tab (Phase 2+). ~55% of pulls are zonk (nothing or 1–2 dickoin dust). Good rewards are extremely rare — legendary is ~0.002%. Each pull costs 50 $GROWDY.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>How do Guild Raids work?</summary>
+            <p>Raid windows open on a schedule. Join a guild, lock a $GROWDY entry fee, and grind during the window — your guild score is total dickoin earned, phase reached, and clicks. The top guild splits the prize pool by each member's contribution. Upgrade the Guild Raids skill and Raid Squad worker to survive burn longer during raids.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>Is this pay-to-win?</summary>
+            <p>No. Progress comes from play time and strategy. Holding $GROWDY unlocks phases and boosts — but skill and consistency still win raids.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>What happens if I go impotent?</summary>
+            <p>Your IMPOTENT bar resets and you drop one phase. Use LIQUIDATE ASSETS to convert dickoin → IMPOTENT bar at 1:1 if you're in a pinch.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>How do I buy $GROWDY?</summary>
+            <p>Head to the Token page and hit "Buy on Pump.fun", or copy the contract address and swap on any supported DEX.</p>
+          </details>
+
+          <details class="faq-entry">
+            <summary>Can I use my own wallet?</summary>
+            <p>Yes. Open the <strong>Settings</strong> tab in-game (or the wallet button in the header) → Export Secret Key, then import into Phantom or Solflare to take full control.</p>
+          </details>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-copy">© 2026 Growdy — Not financial advice. Just vibes.</p>
+    </footer>
+  </div>
+
+  <a href="faq.html" class="help-btn" aria-label="Help">?</a>
+
+  <div class="music-player" id="musicPlayer">
+    <button type="button" class="music-player-toggle" id="musicToggle" aria-label="Music" aria-expanded="false" aria-controls="musicPanel">
+      <span class="music-player-icon" aria-hidden="true">🎵</span>
+    </button>
+    <div class="music-player-panel" id="musicPanel" hidden>
+      <p class="music-player-track" id="musicTrack">Goofy 1</p>
+      <div class="music-player-controls">
+        <button type="button" class="music-player-btn" id="musicPlay" aria-label="Play">▶</button>
+        <button type="button" class="music-player-btn" id="musicPause" aria-label="Pause">⏸</button>
+        <button type="button" class="music-player-btn" id="musicNext" aria-label="Next track">⏭</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

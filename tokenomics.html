@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Token — Growdy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="header">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="" class="logo-icon" width="32" height="32" />
+        GROWDY
+      </a>
+      <nav class="nav">
+        <a href="how-to-play.html">Gameplay</a>
+        <a href="tokenomics.html" class="active">Token</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="faq.html">FAQ</a>
+        <a href="about.html" class="nav-wiki">Guide</a>
+      </nav>
+      <div class="header-actions">
+        <button class="wallet-badge" id="burnerWallet" type="button">
+          <span class="wallet-dot"></span>
+          <span class="wallet-address">...</span>
+        </button>
+        <a href="game.html" class="btn-play-nav"><span>Play Now</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-main page-main--token">
+      <div class="token-page">
+        <p class="token-file-label">$GROWDY Token</p>
+        <p class="token-tagline">Size matters on blockchain</p>
+        <h1 class="token-ticker">$GROWDY</h1>
+
+        <p class="token-section-label">Allocation</p>
+
+        <div class="token-allocation">
+          <article class="token-alloc-card">
+            <div class="token-alloc-head">
+              <span class="token-alloc-amount">70M</span>
+              <span class="token-alloc-pct">7%</span>
+            </div>
+            <h2 class="token-alloc-name">Treasury</h2>
+            <p>For SWAP liquidity later in Phase 2 and beyond.</p>
+            <div class="alloc-wallet">
+              <code class="alloc-wallet-addr" title="GRoWY6yf5KsSRJE5yCVSVAyp4LvtXi1d7W3x1wn8qpqz">GRoW…qpqz</code>
+              <button type="button" class="alloc-wallet-copy" data-copy-address="GRoWY6yf5KsSRJE5yCVSVAyp4LvtXi1d7W3x1wn8qpqz" aria-label="Copy treasury wallet">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span class="alloc-wallet-copy-label">Copy</span>
+              </button>
+            </div>
+          </article>
+          <article class="token-alloc-card">
+            <div class="token-alloc-head">
+              <span class="token-alloc-amount">20M</span>
+              <span class="token-alloc-pct">2%</span>
+            </div>
+            <h2 class="token-alloc-name">Lock</h2>
+            <p>Reserved supply — locked allocation.</p>
+          </article>
+        </div>
+
+        <p class="token-section-label">What $GROWDY does in-game</p>
+
+        <div class="token-utilities">
+          <article class="token-utility">
+            <span class="token-utility-icon" aria-hidden="true">•</span>
+            <div>
+              <h2>Unlock Phase 4–6</h2>
+              <p>Hold minimum $GROWDY to access the growth and scale-up phases.</p>
+            </div>
+          </article>
+          <article class="token-utility token-utility--wide">
+            <span class="token-utility-icon" aria-hidden="true">•</span>
+            <div>
+              <h2>Grow Gacha</h2>
+              <p>Spend $GROWDY in-game for random boosts — dickoin, HP, and timed multipliers.</p>
+              <ul class="token-utility-detail">
+                <li><strong>Cost</strong> — 50 $GROWDY per pull.</li>
+                <li><strong>Drops</strong> — Mostly zonk. Tiny rewards common; rare+ extremely low.</li>
+                <li><strong>Unlock</strong> — Available from Phase 2 once you hold $GROWDY from swap.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="token-utility token-utility--wide">
+            <span class="token-utility-icon" aria-hidden="true">•</span>
+            <div>
+              <h2>Guild Raids</h2>
+              <p>Timed competitive windows — guilds grind in-game, top score takes the $GROWDY pool.</p>
+              <ul class="token-utility-detail">
+                <li><strong>Entry</strong> — Lock a $GROWDY fee when the raid opens. All entry fees fill one prize pool.</li>
+                <li><strong>Score</strong> — Your guild's total = dickoin earned + phase reached + clicks during the raid window only.</li>
+                <li><strong>Win</strong> — Highest-scoring guild wins. Pool splits to members by each person's share of guild score.</li>
+                <li><strong>Prep</strong> — Upgrade Guild Raids skill (+IMPOTENT bar) and hire Raid Squad (Phase 5+) to survive burn longer.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="token-ca">
+          <code class="token-ca-address" id="contractAddress">HMJKARkqpNxKfxF6kAayrGCBozcupHX3GrZ8bhvWpuMp</code>
+          <button class="token-ca-copy" id="copyCa" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="token-ca-copy-label">Copy CA</span>
+          </button>
+        </div>
+
+        <div class="token-links">
+          <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" class="token-link-btn">
+            <img src="assets/icons/pf.png" alt="" width="22" height="22" />
+            Pump.fun
+          </a>
+          <a href="https://dexscreener.com" target="_blank" rel="noopener noreferrer" class="token-link-btn">
+            <img src="assets/icons/dx.png" alt="" width="22" height="22" />
+            Dexscreener
+          </a>
+        </div>
+
+        <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" class="btn-token-buy">
+          Buy $GROWDY on Pump.fun →
+        </a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-copy">© 2026 Growdy — Not financial advice. Just vibes.</p>
+    </footer>
+  </div>
+
+  <a href="faq.html" class="help-btn" aria-label="Help">?</a>
+
+  <div class="music-player" id="musicPlayer">
+    <button type="button" class="music-player-toggle" id="musicToggle" aria-label="Music" aria-expanded="false" aria-controls="musicPanel">
+      <span class="music-player-icon" aria-hidden="true">🎵</span>
+    </button>
+    <div class="music-player-panel" id="musicPanel" hidden>
+      <p class="music-player-track" id="musicTrack">Goofy 1</p>
+      <div class="music-player-controls">
+        <button type="button" class="music-player-btn" id="musicPlay" aria-label="Play">▶</button>
+        <button type="button" class="music-player-btn" id="musicPause" aria-label="Pause">⏸</button>
+        <button type="button" class="music-player-btn" id="musicNext" aria-label="Next track">⏭</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

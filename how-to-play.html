@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gameplay — Growdy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="header">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="" class="logo-icon" width="32" height="32" />
+        GROWDY
+      </a>
+      <nav class="nav">
+        <a href="how-to-play.html" class="active">Gameplay</a>
+        <a href="tokenomics.html">Token</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="faq.html">FAQ</a>
+        <a href="about.html" class="nav-wiki">Guide</a>
+      </nav>
+      <div class="header-actions">
+        <button class="wallet-badge" id="burnerWallet" type="button">
+          <span class="wallet-dot"></span>
+          <span class="wallet-address">...</span>
+        </button>
+        <a href="game.html" class="btn-play-nav"><span>Play Now</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="sub-page">
+        <p class="sub-page-label">How to Play</p>
+        <h1 class="sub-page-title">Get Started</h1>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <h3>Burner Wallet</h3>
+            <p>A Solana wallet is auto-generated when you visit — no extension needed.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <h3>Grow Your Worm</h3>
+            <p>Feed and nurture your Growdy to increase its length and MPS rate.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <h3>Earn & Trade</h3>
+            <p>Stack dickoin, convert to $GROWDY, and trade on supported exchanges.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-copy">© 2026 Growdy — Not financial advice. Just vibes.</p>
+    </footer>
+  </div>
+
+  <a href="faq.html" class="help-btn" aria-label="Help">?</a>
+
+  <div class="music-player" id="musicPlayer">
+    <button type="button" class="music-player-toggle" id="musicToggle" aria-label="Music" aria-expanded="false" aria-controls="musicPanel">
+      <span class="music-player-icon" aria-hidden="true">🎵</span>
+    </button>
+    <div class="music-player-panel" id="musicPanel" hidden>
+      <p class="music-player-track" id="musicTrack">Goofy 1</p>
+      <div class="music-player-controls">
+        <button type="button" class="music-player-btn" id="musicPlay" aria-label="Play">▶</button>
+        <button type="button" class="music-player-btn" id="musicPause" aria-label="Pause">⏸</button>
+        <button type="button" class="music-player-btn" id="musicNext" aria-label="Next track">⏭</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
