@@ -39,9 +39,16 @@
 
 /* Hero stagger */
 .hero-stage,
-.hero-mascot {
+.hero-mascot--video {
   opacity: 0;
   animation: popIn 0.7s var(--ease-spring) 0.1s forwards;
+}
+
+@media (max-width: 900px) {
+  .hero-mascot--static {
+    opacity: 0;
+    animation: popIn 0.7s var(--ease-spring) 0.1s forwards;
+  }
 }
 
 .hero-landing .headline,

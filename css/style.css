@@ -143,6 +143,16 @@ html {
   min-height: 100dvh;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.page--landing .hero-landing {
+  flex: none;
+  min-height: auto;
+}
+
+.page--landing .site-footer {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
 }
 
 .nav-play-mobile {
@@ -350,6 +360,10 @@ html {
   margin-bottom: -36px;
   filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
   background: transparent;
+}
+
+.hero-mascot--static {
+  display: none;
 }
 
 .hero-bg-logo {
@@ -1990,22 +2004,35 @@ body.wallet-modal-active {
 
   .hero-landing {
     justify-content: flex-start;
-    padding: 8px 16px 24px;
+    padding: 4px 16px 12px;
   }
 
   .hero-stage {
-    width: min(480px, 94vw);
+    width: min(360px, 92vw);
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-mascot--video {
+    display: none;
+  }
+
+  .hero-mascot--static {
+    display: block;
+    width: min(140px, 34vw);
+    aspect-ratio: auto;
     margin-bottom: 4px;
   }
 
-  .hero-mascot {
-    width: min(200px, 42vw);
-    margin-bottom: -24px;
+  .hero-bg-logo {
+    width: min(320px, 86vw);
+    margin-top: 0;
   }
 
   .site-footer {
-    padding: 24px 16px 20px;
-    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    padding: 20px 16px calc(72px + env(safe-area-inset-bottom, 0px));
   }
 
   .help-btn {
@@ -2242,11 +2269,21 @@ body.wallet-modal-active {
 
   .subheadline {
     font-size: 0.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    line-height: 1.5;
   }
 
-  .hero-mascot {
-    width: min(168px, 38vw);
+  .hero-mascot--static {
+    width: min(120px, 30vw);
+  }
+
+  .hero-bg-logo {
+    width: min(280px, 84vw);
+  }
+
+  .cta-row {
+    padding: 8px 0 12px;
+    margin-bottom: 4px;
   }
 
   .token-links {
