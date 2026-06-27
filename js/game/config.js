@@ -70,10 +70,10 @@ export const PHASES = [
   {
     id: 2,
     name: 'The Trim',
-    tagline: 'Circumcised look. Swap unlocks here.',
+    tagline: 'Circumcised look. Swap unlocks — burn starts here.',
     lengthMultiplier: 1,
-    burnRate: 0,
-    baseMaxHp: 120,
+    burnRate: 1,
+    baseMaxHp: 130,
     baseClickDickoin: 0.38,
     basePassiveDickoin: 0.08,
     swapUnlocked: true,
@@ -83,7 +83,7 @@ export const PHASES = [
   {
     id: 3,
     name: 'Stretching',
-    tagline: 'Length increases. Burn begins.',
+    tagline: 'Length increases. Burn intensifies.',
     lengthMultiplier: 1.35,
     burnRate: 1.8,
     baseMaxHp: 150,

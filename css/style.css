@@ -1286,6 +1286,77 @@ body.wallet-modal-active {
   line-height: 1.45;
 }
 
+.gameplay-guide {
+  margin-top: 28px;
+  text-align: left;
+}
+
+.gameplay-guide-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--yellow);
+  margin: 6px 0 16px;
+}
+
+.gameplay-phase {
+  background: rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.gameplay-phase h3 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.gameplay-eta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cyan);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(78, 205, 196, 0.12);
+  border: 1px solid rgba(78, 205, 196, 0.28);
+}
+
+.gameplay-reward {
+  font-size: 0.76rem;
+  color: var(--yellow);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.gameplay-reqs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gameplay-reqs li {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.45;
+}
+
+.gameplay-reqs li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+}
+
 .tokenomics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

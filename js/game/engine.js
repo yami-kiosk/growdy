@@ -384,7 +384,7 @@ function checkPhaseUnlock(state) {
 
 /** @param {GameState} state */
 function applyImpotent(state) {
-  if (state.phase <= 2) {
+  if (state.phase <= 1) {
     state.hp = computeMaxHp(state);
     state.lastEvent = 'hp_refill';
     return;

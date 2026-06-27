@@ -227,7 +227,7 @@ function showImpotentModal(newPhaseId, oldPhaseId) {
         : 'Safe zone — zero burn',
     ];
     if (nextPhase) {
-      perks.push(`Re-unlock Phase ${newPhaseId + 1}: earn ${formatNum(nextPhase.unlockTotalDickoin)} dickoin total`);
+      perks.push(`Re-unlock Phase ${newPhaseId + 1}: meet worker & skill requirements again`);
     }
     els.phaseModalPerks.innerHTML = perks.map((perk) => `<li>${perk}</li>`).join('');
   }
@@ -475,9 +475,19 @@ function render() {
   if (els.phaseProgressBar) els.phaseProgressBar.style.width = `${stats.progressToNextPhase * 100}%`;
 
   if (els.phaseProgressText) {
-    els.phaseProgressText.textContent = stats.nextPhase
-      ? `${formatNum(state.totalDickoinEarned)} / ${formatNum(stats.nextPhaseCost)} dickoin earned`
-      : 'Max phase reached — Season Exit eligible';
+    if (!stats.nextPhase) {
+      els.phaseProgressText.textContent = 'Max phase reached — Season Exit eligible';
+    } else if (stats.gateStatus) {
+      const unmet = stats.gateStatus.items.find((item) => !item.met);
+      if (unmet) {
+        const label = unmet.type === 'growdy'
+          ? `${formatNum(unmet.have)} / ${formatNum(unmet.need)} $GROWDY`
+          : `${unmet.name} Lv ${unmet.have}/${unmet.need}`;
+        els.phaseProgressText.textContent = `Phase ${stats.nextPhase.id}: ${label} · ${stats.gateStatus.met}/${stats.gateStatus.total} reqs`;
+      } else {
+        els.phaseProgressText.textContent = `Phase ${stats.nextPhase.id} unlocked — ${stats.gateStatus.etaLabel ?? 'requirements met'}`;
+      }
+    }
   }
 
   if (els.hpFill) els.hpFill.style.width = `${Math.max(0, Math.min(100, hpPct))}%`;
