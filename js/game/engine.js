@@ -14,6 +14,7 @@ import {
   getPhase,
   getWorker,
   getSkill,
+  getPhaseGateStatus,
   GACHA_POOL,
   GACHA_MIN_PHASE,
   GACHA_SINGLE_COST,
@@ -285,7 +286,8 @@ export function computeClickPower(state) {
   const phase = getPhaseConfig(state);
   const gripLv = skillLevel(state, 'growth_access');
   const buff = state.gachaBuffs?.clickMult ?? 1;
-  return phase.baseClickDickoin * (1 + gripLv * 0.25) * buff;
+  const gripBonus = getSkill('growth_access')?.effectPerLevel ?? 0.18;
+  return phase.baseClickDickoin * (1 + gripLv * gripBonus) * buff;
 }
 
 /** @param {GameState} state */
@@ -366,16 +368,15 @@ function checkPhaseUnlock(state) {
   let leveled = false;
 
   while (state.phase < PHASES.length) {
-    const next = getPhase(state.phase + 1);
-    if (state.totalDickoinEarned >= next.unlockTotalDickoin) {
-      state.phase += 1;
-      state.pendingPhaseUps.push(state.phase);
-      leveled = true;
-      const maxHp = computeMaxHp(state);
-      state.hp = Math.min(state.hp + maxHp * 0.25, maxHp);
-    } else {
-      break;
-    }
+    const nextPhaseId = state.phase + 1;
+    const gate = getPhaseGateStatus(state, nextPhaseId);
+    if (!gate.complete) break;
+
+    state.phase += 1;
+    state.pendingPhaseUps.push(state.phase);
+    leveled = true;
+    const maxHp = computeMaxHp(state);
+    state.hp = Math.min(state.hp + maxHp * 0.25, maxHp);
   }
 
   return leveled;
@@ -391,9 +392,6 @@ function applyImpotent(state) {
 
   const droppedFrom = state.phase;
   state.phase = Math.max(1, state.phase - 1);
-
-  // Reset progress to this phase's threshold — must re-earn dickoin to climb again
-  state.totalDickoinEarned = getPhase(state.phase).unlockTotalDickoin;
 
   state.pendingPhaseUps = (state.pendingPhaseUps ?? []).filter((p) => p <= state.phase);
 
@@ -446,7 +444,8 @@ export function buyWorker(state, workerId) {
   if (state.dickoin < cost) return false;
   state.dickoin -= cost;
   state.workers[workerId] = (state.workers[workerId] ?? 0) + 1;
-  state.lastEvent = `buy_worker:${workerId}`;
+  const leveled = checkPhaseUnlock(state);
+  state.lastEvent = leveled ? 'phase_up' : `buy_worker:${workerId}`;
   return true;
 }
 
@@ -469,7 +468,8 @@ export function buySkill(state, skillId) {
   if (state.dickoin < cost) return false;
   state.dickoin -= cost;
   state.skills[skillId] = level + 1;
-  state.lastEvent = `buy_skill:${skillId}`;
+  const leveled = checkPhaseUnlock(state);
+  state.lastEvent = leveled ? 'phase_up' : `buy_skill:${skillId}`;
   return true;
 }
 
@@ -523,10 +523,12 @@ export function getDerivedStats(state) {
   const phase = getPhaseConfig(state);
   const maxHp = computeMaxHp(state);
   const nextPhase = state.phase < PHASES.length ? getPhase(state.phase + 1) : null;
+  const gateStatus = nextPhase ? getPhaseGateStatus(state, nextPhase.id) : null;
   const gacha = getGachaMultipliers(state);
   return {
     phase,
     nextPhase,
+    gateStatus,
     maxHp,
     clickPower: computeClickPower(state),
     passiveDickoin: computePassiveDickoin(state),
@@ -542,10 +544,7 @@ export function getDerivedStats(state) {
     gachaClickMult: gacha.click,
     gachaPassiveMult: gacha.passive,
     gachaBuffExpiresAt: gacha.expiresAt,
-    progressToNextPhase: nextPhase
-      ? Math.min(1, state.totalDickoinEarned / nextPhase.unlockTotalDickoin)
-      : 1,
-    nextPhaseCost: nextPhase?.unlockTotalDickoin ?? null,
+    progressToNextPhase: gateStatus?.progress ?? 1,
   };
 }
 

@@ -48,7 +48,7 @@
  */
 
 export const TICK_MS = 100;
-export const MAX_CPS = 12;
+export const MAX_CPS = 9;
 export const SAVE_KEY = 'growdy_game_save';
 export const SAVE_VERSION = 2;
 
@@ -61,7 +61,7 @@ export const PHASES = [
     lengthMultiplier: 1,
     burnRate: 0,
     baseMaxHp: 100,
-    baseClickDickoin: 0.35,
+    baseClickDickoin: 0.18,
     basePassiveDickoin: 0,
     swapUnlocked: false,
     unlockTotalDickoin: 0,
@@ -74,8 +74,8 @@ export const PHASES = [
     lengthMultiplier: 1,
     burnRate: 0,
     baseMaxHp: 120,
-    baseClickDickoin: 0.7,
-    basePassiveDickoin: 0.14,
+    baseClickDickoin: 0.38,
+    basePassiveDickoin: 0.08,
     swapUnlocked: true,
     unlockTotalDickoin: 2_700,
     visualKey: 'phase2',
@@ -87,8 +87,8 @@ export const PHASES = [
     lengthMultiplier: 1.35,
     burnRate: 1.8,
     baseMaxHp: 150,
-    baseClickDickoin: 1.4,
-    basePassiveDickoin: 0.42,
+    baseClickDickoin: 0.75,
+    basePassiveDickoin: 0.22,
     swapUnlocked: true,
     unlockTotalDickoin: 300_000,
     visualKey: 'phase3',
@@ -100,8 +100,8 @@ export const PHASES = [
     lengthMultiplier: 1.75,
     burnRate: 4.5,
     baseMaxHp: 200,
-    baseClickDickoin: 2.8,
-    basePassiveDickoin: 1.12,
+    baseClickDickoin: 1.5,
+    basePassiveDickoin: 0.58,
     swapUnlocked: true,
     unlockTotalDickoin: 2_500_000,
     visualKey: 'phase4',
@@ -113,8 +113,8 @@ export const PHASES = [
     lengthMultiplier: 2.2,
     burnRate: 9,
     baseMaxHp: 280,
-    baseClickDickoin: 5.25,
-    basePassiveDickoin: 2.8,
+    baseClickDickoin: 2.8,
+    basePassiveDickoin: 1.45,
     swapUnlocked: true,
     unlockTotalDickoin: 19_000_000,
     visualKey: 'phase5',
@@ -126,13 +126,46 @@ export const PHASES = [
     lengthMultiplier: 3,
     burnRate: 16,
     baseMaxHp: 400,
-    baseClickDickoin: 10.5,
-    basePassiveDickoin: 7,
+    baseClickDickoin: 5.5,
+    basePassiveDickoin: 3.6,
     swapUnlocked: true,
     unlockTotalDickoin: 110_000_000,
     visualKey: 'phase6',
   },
 ];
+
+/**
+ * Phase unlock gates — worker/skill levels (+ in-game $GROWDY for late phases).
+ * @type {Record<number, { etaLabel?: string, workers?: Record<string, number>, skills?: Record<string, number>, minGrowdy?: number }>}
+ */
+export const PHASE_GATES = {
+  2: {
+    etaLabel: '~8 min',
+    workers: { pump_station: 5 },
+    skills: { growth_access: 5 },
+  },
+  3: {
+    etaLabel: '~2h 12m',
+    workers: { pump_station: 33, trim_clinic: 12, stretch_unit: 1 },
+    skills: { growth_access: 20, guild_raids: 6 },
+  },
+  4: {
+    etaLabel: '~4h 49m',
+    workers: { pump_station: 20, trim_clinic: 20, stretch_unit: 25 },
+    skills: { growth_access: 20, guild_raids: 15 },
+  },
+  5: {
+    etaLabel: '~12h 42m',
+    minGrowdy: 7_200_000,
+    workers: { pump_station: 20, trim_clinic: 20, stretch_unit: 25, skin_forge: 28 },
+    skills: { growth_access: 20, guild_raids: 15 },
+  },
+  6: {
+    etaLabel: 'Endgame',
+    workers: { pump_station: 45, trim_clinic: 25, stretch_unit: 35, skin_forge: 30, raid_squad: 5 },
+    skills: { growth_access: 20, guild_raids: 15 },
+  },
+};
 
 /** @type {WorkerConfig[]} */
 export const WORKERS = [
@@ -140,9 +173,9 @@ export const WORKERS = [
     id: 'pump_station',
     name: 'Pump Station',
     description: 'Core grow crew — pumps out dickoin while you tap.',
-    baseCost: 63,
-    costMult: 1.16,
-    dickoinPerSec: 0.09,
+    baseCost: 95,
+    costMult: 1.18,
+    dickoinPerSec: 0.045,
     hpPerSec: 0,
     minPhase: 1,
   },
@@ -150,9 +183,9 @@ export const WORKERS = [
     id: 'trim_clinic',
     name: 'Trim Clinic',
     description: 'Post-trim care unit — passive dickoin after Phase 2.',
-    baseCost: 300,
-    costMult: 1.18,
-    dickoinPerSec: 0.36,
+    baseCost: 420,
+    costMult: 1.2,
+    dickoinPerSec: 0.17,
     hpPerSec: 0.2,
     minPhase: 2,
   },
@@ -160,9 +193,9 @@ export const WORKERS = [
     id: 'stretch_unit',
     name: 'Stretch Unit',
     description: 'Length ops team — dickoin output through the burn phases.',
-    baseCost: 1_500,
-    costMult: 1.19,
-    dickoinPerSec: 1.44,
+    baseCost: 2_200,
+    costMult: 1.21,
+    dickoinPerSec: 0.68,
     hpPerSec: 0.5,
     minPhase: 3,
   },
@@ -170,9 +203,9 @@ export const WORKERS = [
     id: 'skin_forge',
     name: 'Skin Forge',
     description: 'Mint phase skins — boosted dickoin rate at scale.',
-    baseCost: 10_000,
-    costMult: 1.21,
-    dickoinPerSec: 6.3,
+    baseCost: 14_000,
+    costMult: 1.23,
+    dickoinPerSec: 3,
     hpPerSec: 1.5,
     minPhase: 4,
   },
@@ -180,9 +213,9 @@ export const WORKERS = [
     id: 'raid_squad',
     name: 'Raid Squad',
     description: 'Guild raid crew — elite dickoin & IMPOTENT sustain.',
-    baseCost: 62_500,
-    costMult: 1.23,
-    dickoinPerSec: 27,
+    baseCost: 85_000,
+    costMult: 1.25,
+    dickoinPerSec: 13,
     hpPerSec: 3,
     minPhase: 5,
   },
@@ -194,18 +227,18 @@ export const SKILLS = [
     id: 'growth_access',
     name: 'Growth Access',
     description: 'Hold $GROWDY, break into Phase 4–6 — +25% click dickoin per level.',
-    baseCost: 200,
-    costMult: 1.35,
+    baseCost: 175,
+    costMult: 1.36,
     maxLevel: 20,
     effect: 'click',
-    effectPerLevel: 0.25,
+    effectPerLevel: 0.18,
     minPhase: 1,
   },
   {
     id: 'guild_raids',
     name: 'Guild Raids',
     description: 'Raid prep — +10% max IMPOTENT bar per level for burn survival.',
-    baseCost: 350,
+    baseCost: 310,
     costMult: 1.4,
     maxLevel: 15,
     effect: 'hp',
@@ -292,4 +325,75 @@ export function getWorker(id) {
 
 export function getSkill(id) {
   return SKILLS.find((s) => s.id === id);
+}
+
+/** @param {number} targetPhaseId */
+export function getPhaseGate(targetPhaseId) {
+  return PHASE_GATES[targetPhaseId] ?? null;
+}
+
+/**
+ * @param {{ workers: Record<string, number>, skills: Record<string, number>, growdy: number }} state
+ * @param {number} targetPhaseId
+ */
+export function getPhaseGateStatus(state, targetPhaseId) {
+  const gate = getPhaseGate(targetPhaseId);
+  if (!gate) {
+    return { complete: true, progress: 1, met: 0, total: 0, items: [], etaLabel: null };
+  }
+
+  /** @type {{ type: string, id?: string, name: string, have: number, need: number, met: boolean }[]} */
+  const items = [];
+  let met = 0;
+  let total = 0;
+
+  for (const [id, need] of Object.entries(gate.workers ?? {})) {
+    const have = state.workers[id] ?? 0;
+    items.push({
+      type: 'worker',
+      id,
+      name: getWorker(id)?.name ?? id,
+      have,
+      need,
+      met: have >= need,
+    });
+    total += 1;
+    if (have >= need) met += 1;
+  }
+
+  for (const [id, need] of Object.entries(gate.skills ?? {})) {
+    const have = state.skills[id] ?? 0;
+    items.push({
+      type: 'skill',
+      id,
+      name: getSkill(id)?.name ?? id,
+      have,
+      need,
+      met: have >= need,
+    });
+    total += 1;
+    if (have >= need) met += 1;
+  }
+
+  if (gate.minGrowdy != null) {
+    const have = state.growdy;
+    items.push({
+      type: 'growdy',
+      name: '$GROWDY in-game',
+      have,
+      need: gate.minGrowdy,
+      met: have >= gate.minGrowdy,
+    });
+    total += 1;
+    if (have >= gate.minGrowdy) met += 1;
+  }
+
+  return {
+    complete: total > 0 && met === total,
+    progress: total ? met / total : 1,
+    met,
+    total,
+    items,
+    etaLabel: gate.etaLabel ?? null,
+  };
 }
